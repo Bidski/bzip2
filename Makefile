@@ -54,7 +54,7 @@ libbz2.a: $(OBJS)
 
 libbz2.so: $(OBJS)
 	rm -f libbz2.so
-	$(CC) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.6 $(OBJS)
+	$(CC) $(CFLAGS) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.6 $(OBJS)
 	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.6
 	rm -f libbz2.so.1.0
 	ln -s libbz2.so.1.0.6 libbz2.so.1.0
