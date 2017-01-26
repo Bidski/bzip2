@@ -22,6 +22,7 @@ LDFLAGS=
 
 BIGFILES=-D_FILE_OFFSET_BITS=64
 CFLAGS ?= -Wall -Winline -O2 -g $(BIGFILES) -fPIC $(CFLAGS)
+CFLAGS += $(BIGFILES)
 
 # Where you want it installed when you do 'make install'
 PREFIX=/usr/local
@@ -35,7 +36,7 @@ OBJS= blocksort.o  \
       decompress.o \
       bzlib.o
 
-all: libbz2.a libbz2.so bzip2 bzip2recover test
+all: libbz2.a libbz2.so bzip2 bzip2recover
 
 bzip2: libbz2.a bzip2.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2 bzip2.o -L. -lbz2
