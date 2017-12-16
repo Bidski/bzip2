@@ -14,6 +14,13 @@ OPTION(BUILD_BINARIES "Build executable binaries" ON)
 OPTION(BUILD_DOCS "Build docs" ON)
 OPTION(RUN_TESTS "Run tests" ON)
 
+# Set some install directories
+SET(INSTALL_PKGCONFIG_DIR "${CMAKE_INSTALL_PREFIX}/share/pkgconfig" CACHE PATH "Installation directory for pkgconfig (.pc) files")
+SET(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE PATH "Installation directory for libraries")
+SET(INSTALL_INC_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "Installation directory for headers")
+SET(INSTALL_MAN_DIR "${CMAKE_INSTALL_PREFIX}/share/man" CACHE PATH "Installation directory for manual pages")
+
+
 IF (RUN_TESTS AND NOT BUILD_BINARIES)
     SET(BUILD_BINARIES ON)
 ENDIF()
@@ -245,3 +252,7 @@ IF (BUILD_DOCS)
             DESTINATION man/man1
     )
 ENDIF()
+
+CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/bzip2.pc.cmakein" "${CMAKE_BINARY_DIR}/bzip2.pc" @ONLY)
+INSTALL(FILES "${CMAKE_BINARY_DIR}/bzip2.pc" DESTINATION "${INSTALL_PKGCONFIG_DIR}")
+
