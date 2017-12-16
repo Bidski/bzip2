@@ -74,12 +74,15 @@ ADD_CUSTOM_TARGET(shared_links ALL DEPENDS "${CMAKE_BINARY_DIR}/libbz2.so"
 
 IF (BUILD_BINARIES)
     ADD_EXECUTABLE(bzip2 "${CMAKE_SOURCE_DIR}/bzip2.c")
+    ADD_DEPENDENCIES(bzip2 shared_links bz2_static)
     TARGET_LINK_LIBRARIES(bzip2 bz2)
 
     ADD_EXECUTABLE(bunzip2 "${CMAKE_SOURCE_DIR}/bzip2.c")
+    ADD_DEPENDENCIES(bunzip2 shared_links bz2_static)
     TARGET_LINK_LIBRARIES(bunzip2 bz2)
 
     ADD_EXECUTABLE(bzcat "${CMAKE_SOURCE_DIR}/bzip2.c")
+    ADD_DEPENDENCIES(bzcat shared_links bz2_static)
     TARGET_LINK_LIBRARIES(bzcat bz2)
 
     ADD_EXECUTABLE(bzip2recover "${CMAKE_SOURCE_DIR}/bzip2recover.c")
